@@ -39,13 +39,21 @@
                 if (foundInputs[i] == 1) continue;
                 if (retry <= 0 && i % 2 != (retry % 2)) continue;
                 if (CLOSING_BRACKETS.Contains(charArray[i]))
-                {
                     charArray[i] = OPENING_BRACKETS[CLOSING_BRACKETS.IndexOf(charArray[i])];
-                } else charArray[i] = CLOSING_BRACKETS[OPENING_BRACKETS.IndexOf(charArray[i])];
+                else charArray[i] = CLOSING_BRACKETS[OPENING_BRACKETS.IndexOf(charArray[i])];
             }
         }
 
-        Console.WriteLine("");
+        bool changed = HasFlipped(input.ToCharArray(), charArray);
+        Console.WriteLine("Cserélve lett? " + changed);
+    }
+
+    private static bool HasFlipped(char[] original, char[] flipped) {
+        for (int i = 0; i < original.Length; i++) {
+            if (flipped[i] != original[i]) return true;
+        }
+
+        return false;
     }
 
     private static bool IsFullyFound(int[] foundInputs)
